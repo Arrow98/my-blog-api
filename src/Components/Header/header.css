@@ -1,0 +1,158 @@
+.header-box {
+  position: fixed; /* make it fixed to the top */
+  top: 0;
+  left: 0;
+  width: 100%; /* full width */
+  height: 65px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+
+  background-color: rgba(255, 255, 255, 0.7); /* semi-transparent background */
+  backdrop-filter: blur(10px); /* optional: blur content behind */
+  border-bottom: 1px solid #e5e7eb; /* bottom border instead of full */
+  z-index: 1000; /* ensure it's on top */
+}
+
+.nav-box {
+  display: flex;
+  width: 45%;
+  height: 100%;
+}
+.home-icon-box {
+  width: 30%;
+  height: 100%;
+  display: flex;
+}
+.home-icon-box:hover {
+  cursor: pointer;
+}
+.home-icon-box > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+h2 {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.home-icon-box > div:nth-child(1) {
+  margin: 10px;
+}
+.link-box {
+  display: flex;
+  width: 70%;
+  height: 100%;
+}
+.link-box > div {
+  width: 33.33%;
+  display: flex;
+  font-size: 15px;
+  justify-content: center;
+  align-items: center;
+}
+.link-box > div > div > div:nth-child(2) {
+  margin-left: 10px;
+}
+.link-box > div > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90px;
+  height: 35px;
+  border-radius: 10px;
+}
+.link-box > div :hover {
+  cursor: pointer;
+  background-color: #f4f5f9;
+}
+.sign-in-box {
+  display: flex;
+  width: 15%;
+  height: 100%;
+  align-items: center;
+}
+.sign-in-box > :nth-child(1) {
+  border: 1px solid #e5e7eb;
+  height: 33px;
+  width: 33px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 7px;
+}
+.sign-in-box > :nth-child(2) {
+  border: 1px solid #e5e7eb;
+  height: 33px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 7px;
+  margin-left: 30px;
+}
+.sign-in-box > :nth-child(2) > :nth-child(1) {
+  margin-right: 10px;
+}
+.sign-in-box > div:hover {
+  background-color: #f1f1f2;
+  cursor: pointer;
+}
+/* ------------------------- */
+/* Tablet View (768px–1024px) */
+/* ------------------------- */
+@media (max-width: 1024px) {
+  .nav-box,
+  .link-box,
+  .sign-in-box {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .link-box > div {
+    width: auto;
+    margin: 0 10px;
+  }
+
+  .sign-in-box {
+    justify-content: center;
+  }
+}
+
+/* ------------------------- */
+/* Mobile View (Below 768px) */
+/* ------------------------- */
+@media (max-width: 768px) {
+  .header-box {
+    height: auto;
+    padding: 10px 0;
+  }
+
+  .home-icon-box,
+  .nav-box,
+  .sign-in-box {
+    width: 100%;
+  }
+  .sign-in-box {
+    margin: auto 0;
+  }
+  .link-box {
+    display: none;
+  }
+  .link-box > div {
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .sign-in-box > :nth-child(2) {
+    margin-left: 15px;
+    width: 90px;
+  }
+
+  h2 {
+    font-size: 16px;
+  }
+}
