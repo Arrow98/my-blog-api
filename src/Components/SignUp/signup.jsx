@@ -4,6 +4,7 @@ import { IoBookOutline } from "react-icons/io5";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
 import { FaGithub } from "react-icons/fa";
+import { signinUser } from "../../Services/auth";
 
 export function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
@@ -54,30 +55,7 @@ export function SignUp() {
       isValid
     ) {
       setIsclicked(true);
-    }
-  }
-
-  useEffect(() => {
-    if (isclicked) {
-      const signupUrl = "http://172.20.10.3:3000/api/auth/signup";
-      const signupMethod = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          firstname,
-          lastname,
-          email,
-          password,
-        }),
-      };
-
-      fetch(signupUrl, signupMethod)
-        .then((response) => {
-          if (response.ok) return response.json();
-          throw new Error("Failed to create user");
-        })
+      signinUser(firstname, lastname, email, password)
         .then((data) => {
           console.log(data);
           setFirstname("");
@@ -91,7 +69,7 @@ export function SignUp() {
           setIsclicked(false);
         });
     }
-  }, [isclicked]);
+  }
 
   return (
     <div className="signup">

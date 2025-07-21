@@ -3,6 +3,7 @@ import "./signin.css";
 import { Link } from "react-router-dom";
 import { IoBookOutline } from "react-icons/io5";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
+import { loginUser } from "../../Services/auth";
 
 export function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
@@ -30,39 +31,15 @@ export function SignIn() {
 
     if (!isPasswordInvalid && isEmailValid) {
       setIsLoginclicked(true);
+      loginUser(loginEmail, loginPassword).then((data) => {
+        console.log(data);
+        setLoginEmail("");
+        setLoginPassword("");
+        setIsLoginclicked(false);
+      });
     }
   }
 
-  useEffect(() => {
-    if (isLoginclicked) {
-      const signinUrl = "http://172.20.10.3:3000/api/auth/login";
-      const signMethod = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: loginEmail,
-          password: loginPassword,
-        }),
-      };
-
-      fetch(signinUrl, signMethod)
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            throw new Error("Failed to login user");
-          }
-        })
-        .then((data) => {
-          console.log(data);
-          setLoginEmail("");
-          setLoginPassword("");
-          setIsLoginclicked(false);
-        });
-    }
-  }, [isLoginclicked]);
   return (
     <div className="signin">
       <div className="signin-header">
