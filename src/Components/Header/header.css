@@ -14,10 +14,12 @@
   border-bottom: 1px solid #e5e7eb; /* bottom border instead of full */
   z-index: 1000; /* ensure it's on top */
 }
+
 .link {
   text-decoration: "none";
   color: "inherit";
 }
+
 
 .nav-box {
   display: flex;
@@ -133,7 +135,9 @@ h2 {
   .header-box {
     height: auto;
     padding: 10px 0;
+
     width: 99%;
+
   }
 
   .home-icon-box,
@@ -142,12 +146,15 @@ h2 {
     width: 100%;
   }
   .sign-in-box {
+
     display: flex;
     justify-content: end;
     padding-right: 30px;
   }
   .home-icon-box {
     margin-left: -70px;
+
+    margin: auto 0;
   }
   .link-box {
     display: none;

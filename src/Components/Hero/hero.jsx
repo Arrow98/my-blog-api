@@ -15,7 +15,9 @@ export function Hero() {
           trends in technology and software development.
         </div>
         <div className="hero-buttons">
+
           <button id="hero-button">
+
             <div className="left-space"> Explore Articles</div>
             <FaArrowRightLong />
           </button>
