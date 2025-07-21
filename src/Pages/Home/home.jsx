@@ -4,10 +4,12 @@ import { Header } from "../../Components/Header/header";
 import { Hero } from "../../Components/Hero/hero";
 import { About } from "../../Components/About/about";
 import { Impact } from "../../Components/Impact/impact";
+
 import { ArticleSection } from "../../Components/ArticleSection/articleSection";
 import { LastestArticleSection } from "../../Components/lastestArticleSection/lastestArticleSection";
 import { SubscribeSection } from "../../Components/Subcribe/subcribeSection";
 import { Footer } from "../../Components/Footer/footer";
+
 
 export function Home() {
   return (
@@ -16,10 +18,12 @@ export function Home() {
       <Hero />
       <About />
       <Impact />
+
       <ArticleSection />
       <LastestArticleSection />
       <SubscribeSection />
       <Footer />
+
     </div>
   );
 }
