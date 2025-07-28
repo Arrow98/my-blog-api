@@ -81,8 +81,6 @@
 /* Tablet View (≤ 768px) */
 
 @media (max-width: 1024px) {
-
-
   .hero-box {
     flex-direction: column;
     height: auto;
@@ -122,9 +120,6 @@
   #hero-button {
     width: 100%;
     max-width: 210px;
-
-  }
-
   }
 }
 
