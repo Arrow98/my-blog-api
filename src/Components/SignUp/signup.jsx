@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./signup.css";
 import { IoBookOutline } from "react-icons/io5";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
 import { FaGithub } from "react-icons/fa";
 import { signinUser } from "../../Services/auth";
+import { AppContext } from "../AppContext";
+import Toast from "../ToastMessage/toastMessage";
+import { useNavigate } from "react-router-dom";
 
 export function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
@@ -17,6 +20,10 @@ export function SignUp() {
   const [firstnameError, setFirstnameError] = useState(false);
   const [lastnameError, setLastnameError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const [showSignUpToast, setShowSignUpToast] = useState(false);
+  const { color, setColor } = useContext(AppContext);
+  const [showLoginMessage, setShowLoginMessage] = useState("");
+  const loginNavigate = useNavigate();
 
   const handleGetFirstname = (e) => setFirstname(e.target.value);
   const handleGetLastname = (e) => setLastname(e.target.value);
@@ -63,9 +70,17 @@ export function SignUp() {
           setEmail("");
           setPassword("");
           setIsclicked(false);
+          setColor("green");
+          setShowSignUpToast(true);
+          setShowLoginMessage("SignUp Successful");
+          setTimeout(() => {
+            loginNavigate("/signin");
+          }, 2000);
         })
-        .catch((err) => {
-          console.error(err.message);
+        .catch((error) => {
+          setColor("tomato");
+          setShowSignUpToast(true);
+          setShowLoginMessage("Login UnSuccessful");
           setIsclicked(false);
         });
     }
@@ -145,6 +160,7 @@ export function SignUp() {
           </p>
         </div>
       </div>
+      {showSignUpToast && <Toast message={showLoginMessage} color={color} />}
     </div>
   );
 }
