@@ -4,7 +4,7 @@ import BASE_URL from "../config";
 export async function loginUser(email, password) {
   const signinUrl = `${BASE_URL}/auth/login`;
 
-  const signMethod = {
+  const signinMethod = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -12,12 +12,13 @@ export async function loginUser(email, password) {
     body: JSON.stringify({ email, password }),
   };
 
-  const response = await fetch(signinUrl, signMethod);
+  const response = await fetch(signinUrl, signinMethod);
+  const responseBody = await response.json();
 
   if (response.ok) {
-    return await response.json();
+    return;
   } else {
-    throw new Error("Failed to login user");
+    throw new Error(responseBody.message);
   }
 }
 
@@ -37,10 +38,13 @@ export async function signinUser(firstname, lastname, email, password) {
   };
 
   const response = await fetch(signupUrl, signupMethod);
+  const responseBody = await response.json();
 
   if (response.ok) {
-    return await response.json();
+    return;
   } else {
-    throw new Error("Failed to create user");
+    const errorMessage =
+      responseBody.errors?.[0]?.msg || "Failed to sign up user";
+    throw new Error(errorMessage);
   }
 }

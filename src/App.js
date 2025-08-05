@@ -5,6 +5,8 @@ import { AppProvider } from "./Components/AppContext";
 import { SignupPage } from "./Pages/SignupPage/signupPage";
 import { SignInPage } from "./Pages/SignInPage/signinPage";
 import { HomePage } from "./Pages/homePage/homePage";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import "@fontsource/inter";
 
@@ -18,6 +20,7 @@ function App() {
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/homePage" element={<HomePage />} />
         </Routes>
+        <ToastContainer />
       </BrowserRouter>
     </AppProvider>
   );

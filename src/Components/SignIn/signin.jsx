@@ -4,9 +4,8 @@ import { Link } from "react-router-dom";
 import { IoBookOutline } from "react-icons/io5";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { loginUser } from "../../Services/auth";
-import Toast from "../ToastMessage/toastMessage";
-import { AppContext } from "../AppContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
@@ -15,9 +14,6 @@ export function SignIn() {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [isLoginclicked, setIsLoginclicked] = useState(false);
-  const [showLoginToast, setShowLoginToast] = useState(false);
-  const [showSigninMessage, setShowSigninMessage] = useState("");
-  const { color, setColor } = useContext(AppContext);
   const signinNavigate = useNavigate();
 
   const handleEmail = (e) => {
@@ -44,17 +40,13 @@ export function SignIn() {
           setLoginEmail("");
           setLoginPassword("");
           setIsLoginclicked(false);
-          setColor("green");
-          setShowLoginToast(true);
-          setShowSigninMessage("Login Successful");
+          toast.success("Login Successful");
           setTimeout(() => {
             signinNavigate("/homePage");
-          }, 2000);
+          }, 1000);
         })
         .catch((error) => {
-          setColor("tomato");
-          setShowLoginToast(true);
-          setShowSigninMessage("Invalid Password or Email");
+          toast.error(error.message);
           setIsLoginclicked(false);
         });
     }
@@ -119,13 +111,6 @@ export function SignIn() {
           </div>
         </div>
       </div>
-      {showLoginToast && (
-        <Toast
-          message={showSigninMessage}
-          color={color}
-          onclose={() => setShowLoginToast(false)}
-        />
-      )}
     </div>
   );
 }
