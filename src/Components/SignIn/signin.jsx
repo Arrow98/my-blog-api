@@ -54,7 +54,7 @@ export function SignIn() {
         .catch((error) => {
           setColor("tomato");
           setShowLoginToast(true);
-          setShowSigninMessage("Login UnSuccessful");
+          setShowSigninMessage("Invalid Password or Email");
           setIsLoginclicked(false);
         });
     }

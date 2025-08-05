@@ -80,7 +80,7 @@ export function SignUp() {
         .catch((error) => {
           setColor("tomato");
           setShowSignUpToast(true);
-          setShowLoginMessage("Login UnSuccessful");
+          setShowLoginMessage("User Already Exist");
           setIsclicked(false);
         });
     }
