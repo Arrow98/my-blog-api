@@ -10,45 +10,102 @@ import { toast } from "react-toastify";
 
 export function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState(false);
-  const [isclicked, setIsclicked] = useState(false);
-  const [firstnameError, setFirstnameError] = useState(false);
-  const [lastnameError, setLastnameError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
+  const [userDetails, setUserDetails] = useState({
+    firstName: "",
+    lastName: "",
+    password: "",
+    email: "",
+  });
+  const [isSigningup, setIsSigningup] = useState(false);
+  const [errorAlert, setErrorAlert] = useState({
+    firstnameError: false,
+    lastnameError: false,
+    passwordError: false,
+    emailError: false,
+  });
   const loginNavigate = useNavigate();
 
-  const handleGetFirstname = (e) => setFirstname(e.target.value);
-  const handleGetLastname = (e) => setLastname(e.target.value);
-  const handleGetPassword = (e) => setPassword(e.target.value);
-  const handleGetEmail = (e) => setEmail(e.target.value);
+  const handleGetFirstname = (e) =>
+    setUserDetails((prev) => ({
+      ...prev,
+      firstName: e.target.value,
+    }));
+  const handleGetLastname = (e) =>
+    setUserDetails((prev) => ({
+      ...prev,
+      lastName: e.target.value,
+    }));
+  const handleGetPassword = (e) =>
+    setUserDetails((prev) => ({
+      ...prev,
+      password: e.target.value,
+    }));
+  const handleGetEmail = (e) =>
+    setUserDetails((prev) => ({
+      ...prev,
+      email: e.target.value,
+    }));
 
+  function validation() {
+    const isFirstnameInvalid = userDetails.firstName.trim() === "";
+    const isLastnameInvalid = userDetails.lastName.trim() === "";
+    const isPasswordInvalid = userDetails.password.trim() === "";
+    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userDetails.email);
+
+    return {
+      isFirstnameInvalid,
+      isLastnameInvalid,
+      isPasswordInvalid,
+      isValid,
+    };
+  }
   function handleSubmit() {
-    const isFirstnameInvalid = firstname.trim() === "";
-    const isLastnameInvalid = lastname.trim() === "";
-    const isPasswordInvalid = password.trim() === "";
-    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    setEmailError(!isValid);
+    const {
+      isFirstnameInvalid,
+      isLastnameInvalid,
+      isPasswordInvalid,
+      isValid,
+    } = validation();
+
+    setErrorAlert((prev) => ({
+      ...prev,
+      emailError: !isValid,
+    }));
 
     if (isFirstnameInvalid) {
-      setFirstnameError(true);
+      setErrorAlert((prev) => ({
+        ...prev,
+        firstnameError: true,
+      }));
     } else {
-      setFirstnameError(false);
+      setErrorAlert((prev) => ({
+        ...prev,
+        firstnameError: false,
+      }));
     }
 
     if (isLastnameInvalid) {
-      setLastnameError(true);
+      setErrorAlert((prev) => ({
+        ...prev,
+        lastnameError: true,
+      }));
     } else {
-      setLastnameError(false);
+      setErrorAlert((prev) => ({
+        ...prev,
+        lastnameError: false,
+      }));
     }
 
     if (isPasswordInvalid) {
-      setPasswordError(true);
+      setErrorAlert((prev) => ({
+        ...prev,
+        passwordError: true,
+      }));
     } else {
-      setPasswordError(false);
+      setErrorAlert((prev) => ({
+        ...prev,
+        passwordError: false,
+      }));
     }
 
     if (
@@ -57,23 +114,25 @@ export function SignUp() {
       !isPasswordInvalid &&
       isValid
     ) {
-      setIsclicked(true);
-      signinUser(firstname, lastname, email, password)
+      setIsSigningup(true);
+      signinUser(userDetails)
         .then((data) => {
-          console.log(data);
-          setFirstname("");
-          setLastname("");
-          setEmail("");
-          setPassword("");
-          setIsclicked(false);
+          setIsSigningup(false);
           toast.success("SignUp Successful");
+          setUserDetails({
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: "",
+          });
+
           setTimeout(() => {
             loginNavigate("/signin");
           }, 1000);
         })
         .catch((error) => {
           toast.error(error.message);
-          setIsclicked(false);
+          setIsSigningup(false);
         });
     }
   }
@@ -96,7 +155,7 @@ export function SignUp() {
             type="text"
             placeholder="Enter your first name"
             onChange={handleGetFirstname}
-            className={firstnameError ? "red" : null}
+            className={errorAlert.firstnameError ? "red" : null}
           />
 
           <label>Last Name</label>
@@ -104,7 +163,7 @@ export function SignUp() {
             type="text"
             placeholder="Enter your last name"
             onChange={handleGetLastname}
-            className={lastnameError ? "red" : null}
+            className={errorAlert.lastnameError ? "red" : null}
           />
 
           <label>Email</label>
@@ -112,7 +171,7 @@ export function SignUp() {
             type="email"
             placeholder="Enter your email"
             onChange={handleGetEmail}
-            className={emailError ? "red" : null}
+            className={errorAlert.emailError ? "red" : null}
           />
 
           <label>Password</label>
@@ -121,7 +180,7 @@ export function SignUp() {
               type={showPassword ? "text" : "password"}
               placeholder="Create a password"
               onChange={handleGetPassword}
-              className={passwordError ? "red" : null}
+              className={errorAlert.passwordError ? "red" : null}
             />
             <span onClick={() => setShowPassword(!showPassword)}>
               {showPassword ? <IoEyeOffOutline /> : <IoEyeOutline />}
@@ -131,9 +190,9 @@ export function SignUp() {
           <button
             className="signup-button"
             onClick={handleSubmit}
-            disabled={isclicked}
+            disabled={isSigningup}
           >
-            {isclicked ? "Creating Account..." : "Create Account"}
+            {isSigningup ? "Creating Account..." : "Create Account"}
           </button>
 
           <div className="divider">

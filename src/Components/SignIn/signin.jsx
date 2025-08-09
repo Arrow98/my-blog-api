@@ -36,7 +36,6 @@ export function SignIn() {
       setIsLoginclicked(true);
       loginUser(loginEmail, loginPassword)
         .then((data) => {
-          console.log(data);
           setLoginEmail("");
           setLoginPassword("");
           setIsLoginclicked(false);

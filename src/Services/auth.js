@@ -16,13 +16,13 @@ export async function loginUser(email, password) {
   const responseBody = await response.json();
 
   if (response.ok) {
-    return;
+    return responseBody;
   } else {
     throw new Error(responseBody.message);
   }
 }
 
-export async function signinUser(firstname, lastname, email, password) {
+export async function signinUser({ firstName, lastName, email, password }) {
   const signupUrl = `${BASE_URL}/auth/signup`;
   const signupMethod = {
     method: "POST",
@@ -30,8 +30,8 @@ export async function signinUser(firstname, lastname, email, password) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      firstname,
-      lastname,
+      firstName,
+      lastName,
       email,
       password,
     }),
@@ -41,7 +41,7 @@ export async function signinUser(firstname, lastname, email, password) {
   const responseBody = await response.json();
 
   if (response.ok) {
-    return;
+    return responseBody;
   } else {
     const errorMessage =
       responseBody.errors?.[0]?.msg || "Failed to sign up user";
