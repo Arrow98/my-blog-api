@@ -1,7 +1,7 @@
 import BASE_URL from "../config";
 
 // Services/auth.js
-export async function loginUser(email, password) {
+export async function loginUser({ signinEmail, signinPassword }) {
   const signinUrl = `${BASE_URL}/auth/login`;
 
   const signinMethod = {
@@ -9,7 +9,7 @@ export async function loginUser(email, password) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ signinEmail, signinPassword }),
   };
 
   const response = await fetch(signinUrl, signinMethod);

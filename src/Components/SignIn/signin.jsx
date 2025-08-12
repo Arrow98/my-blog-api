@@ -9,35 +9,65 @@ import { toast } from "react-toastify";
 
 export function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
-  const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
+  const [signinDetails, setSigninDetails] = useState({
+    signinEmail: "",
+    signinPassword: "",
+  });
+  const [signinErrorMessages, setSigninErrorMessages] = useState({
+    emailError: false,
+    passwordError: false,
+  });
   const [isLoginclicked, setIsLoginclicked] = useState(false);
   const signinNavigate = useNavigate();
 
   const handleEmail = (e) => {
-    setLoginEmail(e.target.value);
-    setEmailError(false);
+    setSigninDetails((prev) => ({
+      ...prev,
+      signinEmail: e.target.value,
+    }));
+    setSigninErrorMessages((prev) => ({
+      ...prev,
+      emailError: false,
+    }));
   };
   const handlePassword = (e) => {
-    setLoginPassword(e.target.value);
-    setPasswordError(false);
+    setSigninDetails((prev) => ({
+      ...prev,
+      signinPassword: e.target.value,
+    }));
+    setSigninErrorMessages((prev) => ({
+      ...prev,
+      passwordError: false,
+    }));
   };
 
   function handleSigninSubmit() {
-    const isPasswordInvalid = loginPassword.trim() === "";
-    const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(loginEmail);
-    setEmailError(!isEmailValid);
+    const isPasswordInvalid = signinDetails.signinPassword.trim() === "";
+    const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+      signinDetails.signinEmail
+    );
+    setSigninErrorMessages((prev) => ({
+      ...prev,
+      emailError: !isEmailValid,
+    }));
 
-    setPasswordError(isPasswordInvalid);
+    setSigninErrorMessages((prev) => ({
+      ...prev,
+      passwordError: isPasswordInvalid,
+    }));
 
     if (!isPasswordInvalid && isEmailValid) {
       setIsLoginclicked(true);
-      loginUser(loginEmail, loginPassword)
+      loginUser(signinDetails)
         .then((data) => {
-          setLoginEmail("");
-          setLoginPassword("");
+          setSigninDetails((prev) => ({
+            ...prev,
+            signEmail: "",
+          }));
+          setSigninDetails((prev) => ({
+            ...prev,
+            signinPassword: "",
+          }));
           setIsLoginclicked(false);
           toast.success("Login Successful");
           setTimeout(() => {
@@ -69,7 +99,7 @@ export function SignIn() {
             type="email"
             placeholder="Enter your email"
             onChange={handleEmail}
-            className={emailError ? "red" : null}
+            className={signinErrorMessages.emailError ? "red" : null}
           />
 
           <label>Password</label>
@@ -78,7 +108,7 @@ export function SignIn() {
               type={showPassword ? "text" : "password"}
               placeholder="Enter your password"
               onChange={handlePassword}
-              className={passwordError ? "red" : null}
+              className={signinErrorMessages.passwordError ? "red" : null}
             />
             <span onClick={() => setShowPassword(!showPassword)}>
               {showPassword ? <IoEyeOffOutline /> : <IoEyeOutline />}
