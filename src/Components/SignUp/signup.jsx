@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState } from "react";
 import "./signup.css";
 import { IoBookOutline } from "react-icons/io5";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
@@ -9,133 +9,72 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export function SignUp() {
-  const [showPassword, setShowPassword] = useState(false);
-  const [userDetails, setUserDetails] = useState({
-    firstName: "",
-    lastName: "",
-    password: "",
+  const [form, setForm] = useState({
+    firstname: "",
+    lastname: "",
     email: "",
+    password: "",
   });
-  const [isSigningup, setIsSigningup] = useState(false);
-  const [errorAlert, setErrorAlert] = useState({
-    firstnameError: false,
-    lastnameError: false,
-    passwordError: false,
-    emailError: false,
+
+  const [errors, setErrors] = useState({
+    firstname: false,
+    lastname: false,
+    email: false,
+    password: false,
   });
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [isSigningUp, setIsSigningUp] = useState(false);
   const loginNavigate = useNavigate();
 
-  const handleGetFirstname = (e) =>
-    setUserDetails((prev) => ({
+  const handleChangeInput = (e) => {
+    setForm((prev) => ({
       ...prev,
-      firstName: e.target.value,
+      [e.target.name]: e.target.value,
     }));
-  const handleGetLastname = (e) =>
-    setUserDetails((prev) => ({
-      ...prev,
-      lastName: e.target.value,
-    }));
-  const handleGetPassword = (e) =>
-    setUserDetails((prev) => ({
-      ...prev,
-      password: e.target.value,
-    }));
-  const handleGetEmail = (e) =>
-    setUserDetails((prev) => ({
-      ...prev,
-      email: e.target.value,
-    }));
+  };
+  const validate = () => {
+    const { firstname, lastname, email, password } = form;
 
-  function validation() {
-    const isFirstnameInvalid = userDetails.firstName.trim() === "";
-    const isLastnameInvalid = userDetails.lastName.trim() === "";
-    const isPasswordInvalid = userDetails.password.trim() === "";
-    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userDetails.email);
+    const isFirstnameInvalid = firstname.trim() === "";
+    const isLastnameInvalid = lastname.trim() === "";
+    const isPasswordInvalid = password.trim() === "";
+    const isEmailInvalid = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-    return {
-      isFirstnameInvalid,
-      isLastnameInvalid,
-      isPasswordInvalid,
-      isValid,
-    };
-  }
-  function handleSubmit() {
-    const {
-      isFirstnameInvalid,
-      isLastnameInvalid,
-      isPasswordInvalid,
-      isValid,
-    } = validation();
+    setErrors({
+      firstname: isFirstnameInvalid,
+      lastname: isLastnameInvalid,
+      password: isPasswordInvalid,
+      email: isEmailInvalid,
+    });
 
-    setErrorAlert((prev) => ({
-      ...prev,
-      emailError: !isValid,
-    }));
+    return !(
+      isFirstnameInvalid ||
+      isLastnameInvalid ||
+      isPasswordInvalid ||
+      isEmailInvalid
+    );
+  };
 
-    if (isFirstnameInvalid) {
-      setErrorAlert((prev) => ({
-        ...prev,
-        firstnameError: true,
-      }));
-    } else {
-      setErrorAlert((prev) => ({
-        ...prev,
-        firstnameError: false,
-      }));
-    }
-
-    if (isLastnameInvalid) {
-      setErrorAlert((prev) => ({
-        ...prev,
-        lastnameError: true,
-      }));
-    } else {
-      setErrorAlert((prev) => ({
-        ...prev,
-        lastnameError: false,
-      }));
-    }
-
-    if (isPasswordInvalid) {
-      setErrorAlert((prev) => ({
-        ...prev,
-        passwordError: true,
-      }));
-    } else {
-      setErrorAlert((prev) => ({
-        ...prev,
-        passwordError: false,
-      }));
-    }
-
-    if (
-      !isFirstnameInvalid &&
-      !isLastnameInvalid &&
-      !isPasswordInvalid &&
-      isValid
-    ) {
-      setIsSigningup(true);
-      signinUser(userDetails)
-        .then((data) => {
-          setIsSigningup(false);
-          toast.success("SignUp Successful");
-          setUserDetails({
-            firstName: "",
-            lastName: "",
-            email: "",
-            password: "",
-          });
-
-          setTimeout(() => {
-            loginNavigate("/signin");
-          }, 1000);
-        })
-        .catch((error) => {
-          toast.error(error.message);
-          setIsSigningup(false);
-        });
-    }
-  }
+  const handleSubmit = () => {
+    if (!validate()) return;
+    setIsSigningUp(true);
+    console.log(form);
+    signinUser(form.firstname, form.lastname, form.email, form.password)
+      .then((data) => {
+        setForm({ firstname: "", lastname: "", email: "", password: "" });
+        toast.success("SignUp Successful");
+        setTimeout(() => {
+          loginNavigate("/signin");
+        }, 1000);
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      })
+      .finally(() => {
+        setIsSigningUp(false);
+      });
+  };
 
   return (
     <div className="signup">
@@ -154,24 +93,28 @@ export function SignUp() {
           <input
             type="text"
             placeholder="Enter your first name"
-            onChange={handleGetFirstname}
-            className={errorAlert.firstnameError ? "red" : null}
+            onChange={handleChangeInput}
+            className={errors.firstname ? "red" : null}
+            name="firstname"
+            value={form.firstname}
           />
 
           <label>Last Name</label>
           <input
             type="text"
             placeholder="Enter your last name"
-            onChange={handleGetLastname}
-            className={errorAlert.lastnameError ? "red" : null}
+            onChange={handleChangeInput}
+            name="lastname"
+            className={errors.lastname ? "red" : null}
           />
 
           <label>Email</label>
           <input
             type="email"
             placeholder="Enter your email"
-            onChange={handleGetEmail}
-            className={errorAlert.emailError ? "red" : null}
+            onChange={handleChangeInput}
+            className={errors.email ? "red" : null}
+            name="email"
           />
 
           <label>Password</label>
@@ -179,8 +122,9 @@ export function SignUp() {
             <input
               type={showPassword ? "text" : "password"}
               placeholder="Create a password"
-              onChange={handleGetPassword}
-              className={errorAlert.passwordError ? "red" : null}
+              onChange={handleChangeInput}
+              className={errors.password ? "red" : null}
+              name="password"
             />
             <span onClick={() => setShowPassword(!showPassword)}>
               {showPassword ? <IoEyeOffOutline /> : <IoEyeOutline />}
@@ -190,9 +134,9 @@ export function SignUp() {
           <button
             className="signup-button"
             onClick={handleSubmit}
-            disabled={isSigningup}
+            disabled={isSigningUp}
           >
-            {isSigningup ? "Creating Account..." : "Create Account"}
+            {isSigningUp ? "Creating Account..." : "Create Account"}
           </button>
 
           <div className="divider">

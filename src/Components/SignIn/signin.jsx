@@ -10,8 +10,8 @@ import { toast } from "react-toastify";
 export function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
   const [signinDetails, setSigninDetails] = useState({
-    signinEmail: "",
-    signinPassword: "",
+    email: "",
+    password: "",
   });
   const [signinErrorMessages, setSigninErrorMessages] = useState({
     emailError: false,
@@ -20,65 +20,45 @@ export function SignIn() {
   const [isLoginclicked, setIsLoginclicked] = useState(false);
   const signinNavigate = useNavigate();
 
-  const handleEmail = (e) => {
-    setSigninDetails((prev) => ({
-      ...prev,
-      signinEmail: e.target.value,
-    }));
-    setSigninErrorMessages((prev) => ({
-      ...prev,
-      emailError: false,
-    }));
+  const validate = () => {
+    const { signinEmail, signinPassword } = signinDetails;
+    const isPasswordInvalid = signinPassword.trim() === "";
+    const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(signinEmail);
+    setSigninErrorMessages({
+      emailError: isEmailValid,
+      passwordError: isPasswordInvalid,
+    });
+
+    return !(isPasswordInvalid || isEmailValid);
   };
-  const handlePassword = (e) => {
+
+  const handleChangeInput = (e) => {
     setSigninDetails((prev) => ({
       ...prev,
-      signinPassword: e.target.value,
-    }));
-    setSigninErrorMessages((prev) => ({
-      ...prev,
-      passwordError: false,
+      [e.target.name]: e.target.value,
     }));
   };
 
   function handleSigninSubmit() {
-    const isPasswordInvalid = signinDetails.signinPassword.trim() === "";
-    const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-      signinDetails.signinEmail
-    );
-    setSigninErrorMessages((prev) => ({
-      ...prev,
-      emailError: !isEmailValid,
-    }));
-
-    setSigninErrorMessages((prev) => ({
-      ...prev,
-      passwordError: isPasswordInvalid,
-    }));
-
-    if (!isPasswordInvalid && isEmailValid) {
-      setIsLoginclicked(true);
-      loginUser(signinDetails)
-        .then((data) => {
-          setSigninDetails((prev) => ({
-            ...prev,
-            signEmail: "",
-          }));
-          setSigninDetails((prev) => ({
-            ...prev,
-            signinPassword: "",
-          }));
-          setIsLoginclicked(false);
-          toast.success("Login Successful");
-          setTimeout(() => {
-            signinNavigate("/homePage");
-          }, 1000);
-        })
-        .catch((error) => {
-          toast.error(error.message);
-          setIsLoginclicked(false);
+    if (!validate) return;
+    setIsLoginclicked(true);
+    loginUser(signinDetails)
+      .then((data) => {
+        setSigninDetails({
+          email: "",
+          password: "",
         });
-    }
+
+        setIsLoginclicked(false);
+        toast.success("Login Successful");
+        setTimeout(() => {
+          signinNavigate("/homePage");
+        }, 1000);
+      })
+      .catch((error) => {
+        toast.error(error.message);
+        setIsLoginclicked(false);
+      });
   }
 
   return (
@@ -98,8 +78,9 @@ export function SignIn() {
           <input
             type="email"
             placeholder="Enter your email"
-            onChange={handleEmail}
+            onChange={handleChangeInput}
             className={signinErrorMessages.emailError ? "red" : null}
+            name="email"
           />
 
           <label>Password</label>
@@ -107,8 +88,9 @@ export function SignIn() {
             <input
               type={showPassword ? "text" : "password"}
               placeholder="Enter your password"
-              onChange={handlePassword}
+              onChange={handleChangeInput}
               className={signinErrorMessages.passwordError ? "red" : null}
+              name="password"
             />
             <span onClick={() => setShowPassword(!showPassword)}>
               {showPassword ? <IoEyeOffOutline /> : <IoEyeOutline />}
