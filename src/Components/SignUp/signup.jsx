@@ -139,17 +139,6 @@ export function SignUp() {
             {isSigningUp ? "Creating Account..." : "Create Account"}
           </button>
 
-          <div className="divider">
-            <span>OR CONTINUE WITH</span>
-          </div>
-          <div className="social-buttons">
-            <button className="social-btn">
-              <MdEmail className="icon" /> Google
-            </button>
-            <button className="social-btn">
-              <FaGithub className="icon" /> GitHub
-            </button>
-          </div>
           <p className="signin-link">
             Already have an account? <a href="#">Sign in</a>
           </p>
