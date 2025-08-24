@@ -59,7 +59,7 @@ export function SignUp() {
   const handleSubmit = () => {
     if (!validate()) return;
     setIsSigningUp(true);
-    console.log(form);
+
     signinUser(form.firstname, form.lastname, form.email, form.password)
       .then((data) => {
         setForm({ firstname: "", lastname: "", email: "", password: "" });
