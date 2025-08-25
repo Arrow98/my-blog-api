@@ -79,7 +79,8 @@
   border: 1px solid #e5e7eb;
 }
 /* Tablet View (≤ 768px) */
-@media (max-width: 768px) {
+
+@media (max-width: 1024px) {
   .hero-box {
     flex-direction: column;
     height: auto;
@@ -112,11 +113,13 @@
     flex-direction: column;
     gap: 1rem;
     margin-top: 20px;
+
+    height: 200px;
   }
 
-  .hero-buttons button {
+  #hero-button {
     width: 100%;
-    max-width: 300px;
+    max-width: 210px;
   }
 }
 
@@ -142,6 +145,11 @@
     width: 100%;
     font-size: 14px;
     height: 2.5rem;
+  }
+
+  #hero-button {
+    width: 100%;
+    max-width: 300px;
   }
 
   .left-space {
