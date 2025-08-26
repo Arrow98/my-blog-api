@@ -6,7 +6,6 @@ import { SignupPage } from "./Pages/SignupPage/signupPage";
 import { SignInPage } from "./Pages/SignInPage/signinPage";
 import { HomePage } from "./Pages/homePage/homePage";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 import "@fontsource/inter";
 
