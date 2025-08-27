@@ -8,6 +8,11 @@
 .signin-header {
   display: flex;
 }
+.Toastify__close-button {
+  margin-top: 0px !important;
+  width: 30px !important;
+  height: 20px !important;
+}
 .signin-header-info {
   font-size: 25px;
   font-weight: bold;

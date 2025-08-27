@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import "./signup.css";
 import { IoBookOutline } from "react-icons/io5";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
-import { MdEmail } from "react-icons/md";
-import { FaGithub } from "react-icons/fa";
 import { signinUser } from "../../Services/auth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -140,7 +138,7 @@ export function SignUp() {
           </button>
 
           <p className="signin-link">
-            Already have an account? <a href="#">Sign in</a>
+            Already have an account? <a href="/signin">Sign in</a>
           </p>
         </div>
       </div>
