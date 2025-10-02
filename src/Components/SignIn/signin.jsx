@@ -48,11 +48,12 @@ export function SignIn() {
           email: "",
           password: "",
         });
-
+        localStorage.setItem("token", data.token);
+        console.log(data.token);
         setIsLoginclicked(false);
         toast.success("Login Successful");
         setTimeout(() => {
-          signinNavigate("/homePage");
+          signinNavigate("/articlePage");
         }, 1000);
       })
       .catch((error) => {

@@ -1,8 +1,6 @@
 import React from "react";
 import "./header.css";
-
 import { Link } from "react-router-dom";
-
 import { IoBookOutline } from "react-icons/io5";
 import { LuHouse } from "react-icons/lu";
 import { CiSettings } from "react-icons/ci";
@@ -13,7 +11,6 @@ export function Header() {
   return (
     <div className="header-box">
       <div className="nav-box">
-
         <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
           <div className="home-icon-box">
             <div>
@@ -31,10 +28,16 @@ export function Header() {
             </div>
           </div>
           <div>
-            <div>
-              <IoBookOutline size={20} />
-              <div>Blog</div>
-            </div>
+            <Link
+              to="/articlePage"
+              style={{ textDecoration: "none", color: "inherit" }}
+              className="blog-link-box"
+            >
+              <div className="link-box2">
+                <IoBookOutline size={20} />
+                <div>Blog</div>
+              </div>
+            </Link>
           </div>
           <div>
             <div>
@@ -59,7 +62,6 @@ export function Header() {
           >
             <div>Sign In</div>
           </Link>
-
         </div>
       </div>
     </div>
