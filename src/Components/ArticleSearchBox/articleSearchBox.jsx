@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Search, Filter, TrendingUp, Check, ChevronDown } from "lucide-react";
 import "./articleSearchBox.css";
-import BASE_URL from "../../config";
+import { getCategories } from "../../Services/auth";
 
 const sortOptions = ["Newest First", "Oldest First"];
 
@@ -14,9 +14,7 @@ export default function ArticleSearchBox({ setFinalData, getData }) {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch(`${BASE_URL}/categories/`)
-      .then((response) => response.json())
-      .then((data) => setCategories(data.data));
+    getCategories().then((data) => setCategories(data.data));
   }, []);
 
   const filterOptions = ["All"];

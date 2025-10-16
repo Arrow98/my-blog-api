@@ -18,8 +18,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/signup" element={<SignupPage />} />
-          <Route path="/homePage" element={<HomePage />} />
-          <Route path="/articlePage" element={<ArticlePage />} />
+          <Route path="/home-page" element={<HomePage />} />
+          <Route path="/article-page" element={<ArticlePage />} />
         </Routes>
         <ToastContainer />
       </BrowserRouter>
