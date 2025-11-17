@@ -48,10 +48,3 @@ export async function signinUser(firstname, lastname, email, password) {
     throw new Error(errorMessage);
   }
 }
-
-export async function getCategories() {
-  const response = await fetch(`${BASE_URL}/categories/`);
-  const responseBody = await response.json();
-
-  return responseBody;
-}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Search, Filter, TrendingUp, Check, ChevronDown } from "lucide-react";
 import "./articleSearchBox.css";
-import { getCategories } from "../../Services/auth";
+import { getCategories } from "../../Services/categories";
 
 const sortOptions = ["Newest First", "Oldest First"];
 

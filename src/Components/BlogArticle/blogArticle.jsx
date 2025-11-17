@@ -4,7 +4,9 @@ import { BlogArticleCard } from "../BlogArticleCard/BlogArticleCard";
 export function BlogArticle({ finalData }) {
   return (
     <div className="blog-lastestArticleSection-box">
-      <BlogArticleCard finalData={finalData} />
+      {finalData.map((item, index) => {
+        return <BlogArticleCard item={item} index={index} />;
+      })}
     </div>
   );
 }
