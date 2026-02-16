@@ -1,3 +1,3 @@
-const BASE_URL = process.env.BLOG_API_BASE_URL || "http://localhost:5000/api";
+const BASE_URL = process.env.BLOG_API_BASE_URL || "http://blog-api-backend-1-j6l8.onrender.com/api";
 
 export default BASE_URL;

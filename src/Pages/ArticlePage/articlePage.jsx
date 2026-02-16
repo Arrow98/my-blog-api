@@ -32,11 +32,9 @@ export function ArticlePage() {
 
   return (
     <div className="article-page">
-      <Header />
       <BlogSection />
       <ArticleSearchBox setFinalData={setFinalData} getData={getData} />
       <BlogArticle finalData={finalData} />
-      <Footer />
     </div>
   );
 }

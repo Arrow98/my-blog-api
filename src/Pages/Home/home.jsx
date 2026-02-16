@@ -13,14 +13,12 @@ import { Footer } from "../../Components/Footer/footer";
 export function Home() {
   return (
     <div className="home">
-      <Header />
       <Hero />
       <About />
       <Impact />
       <ArticleSection />
       <LastestArticleSection />
       <SubscribeSection />
-      <Footer />
     </div>
   );
 }

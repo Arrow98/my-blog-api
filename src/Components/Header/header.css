@@ -9,9 +9,9 @@
   align-items: center;
   padding: 0 20px;
 
-  background-color: rgba(255, 255, 255, 0.7); /* semi-transparent background */
+  background-color: var(--header-bg); /* semi-transparent background */
   backdrop-filter: blur(10px); /* optional: blur content behind */
-  border-bottom: 1px solid #e5e7eb; /* bottom border instead of full */
+  border-bottom: 1px solid var(--border-color); /* bottom border instead of full */
   z-index: 1000; /* ensure it's on top */
 }
 
@@ -59,6 +59,7 @@ h2 {
   justify-content: center;
   align-items: center;
 }
+
 .link-box > div > div > div:nth-child(2) {
   margin-left: 10px;
 }
@@ -69,6 +70,20 @@ h2 {
   width: 90px;
   height: 35px;
   border-radius: 10px;
+}
+.home-link-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90px;
+  height: 35px;
+  border-radius: 10px;
+}
+.link-box11 {
+  display: flex;
+  width: 80%;
+  justify-content: space-around;
+  align-items: center;
 }
 .link-box2 {
   display: flex;
@@ -85,7 +100,7 @@ h2 {
 }
 .link-box > div :hover {
   cursor: pointer;
-  background-color: #f4f5f9;
+  background-color: var(--header-item-hover);
 }
 .sign-in-box {
   display: flex;
@@ -94,7 +109,7 @@ h2 {
   align-items: center;
 }
 .sign-in-box > :nth-child(1) {
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border-color);
   height: 33px;
   width: 33px;
   display: flex;
@@ -103,7 +118,7 @@ h2 {
   border-radius: 7px;
 }
 .sign-in-box > :nth-child(2) {
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border-color);
   height: 33px;
   width: 100px;
   display: flex;
@@ -116,7 +131,7 @@ h2 {
   margin-right: 10px;
 }
 .sign-in-box > div:hover {
-  background-color: #f1f1f2;
+  background-color: var(--header-item-hover);
   cursor: pointer;
 }
 /* ------------------------- */

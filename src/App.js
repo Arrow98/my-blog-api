@@ -6,6 +6,7 @@ import { SignupPage } from "./Pages/SignupPage/signupPage";
 import { SignInPage } from "./Pages/SignInPage/signinPage";
 import { HomePage } from "./Pages/homePage/homePage";
 import { ArticlePage } from "./Pages/ArticlePage/articlePage";
+import { Layout } from "./Components/Layout/Layout";
 import { ToastContainer } from "react-toastify";
 
 import "@fontsource/inter";
@@ -15,11 +16,13 @@ function App() {
     <AppProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/signin" element={<SignInPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/home-page" element={<HomePage />} />
-          <Route path="/article-page" element={<ArticlePage />} />
+          <Route element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/signin" element={<SignInPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/home-page" element={<HomePage />} />
+            <Route path="/article-page" element={<ArticlePage />} />
+          </Route>
         </Routes>
         <ToastContainer />
       </BrowserRouter>
