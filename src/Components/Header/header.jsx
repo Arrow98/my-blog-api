@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import "./header.css";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { IoBookOutline } from "react-icons/io5";
 import { LuHouse } from "react-icons/lu";
 import { CiSettings } from "react-icons/ci";
@@ -10,6 +10,12 @@ import { AppContext } from "../AppContext";
 
 export function Header() {
   const { theme, toggleTheme, user, logout } = useContext(AppContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
 
   return (
     <div className="header-box">
@@ -88,7 +94,7 @@ export function Header() {
               <Link to="/profile" className="dropdown-item">
                 View Profile
               </Link>
-              <div onClick={logout} className="dropdown-item logout">
+              <div onClick={handleLogout} className="dropdown-item logout">
                 Log Out
               </div>
             </div>

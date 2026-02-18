@@ -2,33 +2,44 @@ import React from "react";
 import "./BlogArticleCard.css";
 import { FiUser } from "react-icons/fi";
 import { SlCalender } from "react-icons/sl";
+import { motion } from "framer-motion";
 
-export function BlogArticleCard({ item, index }) {
+export function BlogArticleCard({ item }) {
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    show: { y: 0, opacity: 1 },
+  };
+
   return (
-    <div className="blog-lastestArticle-box">
-      <div className="blog-lastestArticleSection-card" key={index}>
-        <div className="blog-article-image-box">
-          <img src={item.image} alt="Description of image" />
+    <motion.div
+      variants={itemVariants}
+      whileHover={{ y: -8, scale: 1.02, transition: { duration: 0.2 } }}
+      whileTap={{ scale: 0.98 }}
+      className="blog-article-card-wrapper"
+    >
+      <div className="blog-article-image-box">
+        <img src={item.image || "https://via.placeholder.com/400x250"} alt={item.title} />
+        {item.category && <span className="category-badge">{item.category}</span>}
+      </div>
+      <div className="blog-article-content">
+        <div className="blog-article-meta-top">
+          <span>{item.readTime || "5 min read"}</span>
         </div>
-        <div>
-          <div className="blog-article-category">
-            <div>{item.category}</div>
-            <div>{item.readTime}</div>
+        <h3 className="blog-article-title">{item.title}</h3>
+        <p className="blog-article-description">
+          {item.description || item.content?.substring(0, 100) + "..."}
+        </p>
+        <div className="blog-article-footer">
+          <div className="footer-item">
+            <FiUser size={14} />
+            <span>{item.author || "TechBlog Staff"}</span>
           </div>
-          <div className="blog-article-title">{item.title}</div>
-          <div className="blog-article-description">{item.description}</div>
-          <div className="blog-article-creator-box">
-            <div>
-              <FiUser />
-              <div>{item.author}</div>
-            </div>
-            <div>
-              <SlCalender />
-              <div>{item.date}</div>
-            </div>
+          <div className="footer-item">
+            <SlCalender size={14} />
+            <span>{item.date ? new Date(item.date).toLocaleDateString() : "Recently"}</span>
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

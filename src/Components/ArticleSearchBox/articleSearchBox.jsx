@@ -17,52 +17,53 @@ export default function ArticleSearchBox({ setFinalData, getData }) {
     getCategories().then((data) => setCategories(data.data));
   }, []);
 
-  const filterOptions = ["All"];
-  categories.map((detail) => {
-    filterOptions.push(detail.title);
-  });
+  const filterOptions = ["All", ...categories.map((detail) => detail.title)];
+
+  useEffect(() => {
+    let result = [...getData];
+
+    // Search filter
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      result = result.filter((item) => {
+        const titleMatch = item.title?.toLowerCase().includes(query);
+        const authorMatch = item.author?.toLowerCase().includes(query);
+        const categoryMatch = item.category?.toLowerCase().includes(query);
+        const tagsMatch = item.tags?.some((tag) =>
+          tag.toLowerCase().includes(query)
+        );
+        return titleMatch || authorMatch || categoryMatch || tagsMatch;
+      });
+    }
+
+    // Category filter
+    if (selectedFilter !== "All") {
+      result = result.filter((item) => item.category === selectedFilter);
+    }
+
+    // Sort
+    if (selectedSort === "Oldest First") {
+      result.sort((a, b) => new Date(a.date) - new Date(b.date));
+    } else {
+      // Default to Newest First
+      result.sort((a, b) => new Date(b.date) - new Date(a.date));
+    }
+
+    setFinalData(result);
+  }, [searchQuery, selectedFilter, selectedSort, getData, setFinalData]);
 
   function handleOption(option) {
     setSelectedFilter(option);
     setFilterDropdownOpen(false);
-    if (option === "All") {
-      setFinalData(getData);
-    } else {
-      const filteredData = getData.filter(
-        (detail) => detail.category === option
-      );
-      setFinalData(filteredData);
-    }
   }
 
   function handleDetailByTime(option) {
     setSelectedSort(option);
     setSortDropdownOpen(false);
-    if (option === "Oldest First") {
-      const sortedOldest = [...getData].sort((a, b) => {
-        return new Date(a.date) - new Date(b.date);
-      });
-      setFinalData(sortedOldest);
-    }
-    if (option === "Newest First") {
-      const sortedNewest = [...getData].sort((a, b) => {
-        return new Date(b.date) - new Date(a.date);
-      });
-      setFinalData(sortedNewest);
-    }
   }
-  function handleSearchQuery(e) {
-    const query = e.target.value;
-    setSearchQuery(query);
 
-    if (query.trim()) {
-      const searchData = getData.filter((detail) =>
-        detail.category.toLowerCase().includes(query.toLowerCase())
-      );
-      setFinalData(searchData);
-    } else {
-      setFinalData(getData);
-    }
+  function handleSearchQuery(e) {
+    setSearchQuery(e.target.value);
   }
 
   return (
