@@ -4,6 +4,7 @@ import { IoBookOutline } from "react-icons/io5";
 import { FiUsers } from "react-icons/fi";
 import { FaArrowTrendUp } from "react-icons/fa6";
 import { PiMedal } from "react-icons/pi";
+import { motion } from "framer-motion";
 
 export function Impact() {
   const statsData = [
@@ -33,22 +34,57 @@ export function Impact() {
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+  };
+
   return (
     <div className="impact-box">
-      <div className="impact-header">Our Impact</div>
-      <div className="impact-info">
-        Building a thriving community of developers and tech enthusiasts.
-      </div>
-      <div className="impacts-container">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        <div className="impact-header">Our Impact</div>
+        <div className="impact-info">
+          Building a thriving community of developers and tech enthusiasts.
+        </div>
+      </motion.div>
+
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+        className="impacts-container"
+      >
         {statsData.map((item, index) => (
-          <div className="impact-card" key={index}>
-            <div>{item.icon}</div>
+          <motion.div 
+            variants={itemVariants} 
+            whileHover={{ scale: 1.05 }}
+            className="impact-card" 
+            key={index}
+          >
+            <div className="impact-icon">{item.icon}</div>
             <h1>{item.count}</h1>
             <h3>{item.title}</h3>
             <p>{item.description}</p>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }
+

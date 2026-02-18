@@ -1,82 +1,63 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import "./AdminPage.css";
-import { IoStatsChart, IoPeople, IoDocumentText, IoSettings } from "react-icons/io5";
+import { Sidebar } from "./Components/Sidebar/Sidebar";
+import { DashboardOverview } from "./Components/DashboardOverview/DashboardOverview";
+import { CreatePost } from "./Components/CreatePost/CreatePost";
+import { ManageUsers } from "./Components/ManageUsers/ManageUsers";
+import { SiteSettings } from "./Components/SiteSettings/SiteSettings";
+import { AnimatePresence } from "framer-motion";
+import { AppContext } from "../../Components/AppContext";
+import { Navigate } from "react-router-dom";
 
 export function AdminPage() {
+  const { user } = useContext(AppContext);
+  const [activeView, setActiveView] = useState("dashboard");
+
+  if (!user || user.role !== "admin") {
+    return <Navigate to="/" replace />;
+  }
+
+  const renderContent = () => {
+    switch (activeView) {
+      case "dashboard":
+        return <DashboardOverview />;
+      case "create-post":
+        return <CreatePost />;
+      case "manage-users":
+        return <ManageUsers />;
+      case "settings":
+        return <SiteSettings />;
+      default:
+        return <DashboardOverview />;
+    }
+  };
+
   return (
-    <div className="admin-page">
-      <div className="admin-header fade-in-down">
-        <h1>Admin Dashboard</h1>
-        <p>Welcome back, Admin. Here's what's happening today.</p>
-      </div>
+    <div className="admin-layout">
+      <Sidebar activeView={activeView} setActiveView={setActiveView} />
+      
+      <main className="admin-main-content">
+        <header className="admin-content-header">
+          <div className="header-text">
+            <h1>{activeView.charAt(0).toUpperCase() + activeView.slice(1).replace("-", " ")}</h1>
+            <p>Admin Dashboard / {activeView}</p>
+          </div>
+          <div className="admin-profile">
+            <div className="profile-info">
+              <span>Admin User</span>
+              <p>Super Admin</p>
+            </div>
+            <div className="profile-avatar">A</div>
+          </div>
+        </header>
 
-      <div className="stats-grid">
-        <div className="stat-card fade-in-up delay-1">
-          <div className="icon-box">
-            <IoDocumentText size={24} />
-          </div>
-          <div className="stat-info">
-            <h3>Total Posts</h3>
-            <p>124</p>
-          </div>
-        </div>
-        <div className="stat-card fade-in-up delay-2">
-          <div className="icon-box">
-            <IoPeople size={24} />
-          </div>
-          <div className="stat-info">
-            <h3>Total Users</h3>
-            <p>1,234</p>
-          </div>
-        </div>
-        <div className="stat-card fade-in-up delay-3">
-          <div className="icon-box">
-            <IoStatsChart size={24} />
-          </div>
-          <div className="stat-info">
-            <h3>Total Views</h3>
-            <p>45.2k</p>
-          </div>
-        </div>
-        <div className="stat-card fade-in-up delay-4">
-          <div className="icon-box">
-            <IoSettings size={24} />
-          </div>
-          <div className="stat-info">
-            <h3>System Status</h3>
-            <p>Healthy</p>
-          </div>
-        </div>
-      </div>
-
-      <div className="dashboard-content">
-        <div className="recent-activity fade-in-up delay-5">
-          <h2>Recent Activity</h2>
-          <ul>
-            <li>
-              <span className="activity-time">10:30 AM</span>
-              <span className="activity-desc">New post "React Hooks Guide" published.</span>
-            </li>
-            <li>
-              <span className="activity-time">09:15 AM</span>
-              <span className="activity-desc">User "JohnDoe" registered.</span>
-            </li>
-            <li>
-              <span className="activity-time">Yesterday</span>
-              <span className="activity-desc">System maintenance completed.</span>
-            </li>
-          </ul>
-        </div>
-
-        <div className="quick-actions fade-in-up delay-6">
-          <h2>Quick Actions</h2>
-          <div className="action-buttons">
-            <button className="admin-btn">Create New Post</button>
-            <button className="admin-btn">Manage Users</button>
-            <button className="admin-btn">Site Settings</button>
-          </div>
-        </div>
-      </div>
+        <section className="content-viewport">
+          <AnimatePresence mode="wait">
+            {renderContent()}
+          </AnimatePresence>
+        </section>
+      </main>
     </div>
   );
 }
+

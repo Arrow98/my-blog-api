@@ -9,7 +9,7 @@ import { FiUser } from "react-icons/fi";
 import { AppContext } from "../AppContext";
 
 export function Header() {
-  const { theme, toggleTheme } = useContext(AppContext);
+  const { theme, toggleTheme, user, logout } = useContext(AppContext);
 
   return (
     <div className="header-box">
@@ -31,29 +31,37 @@ export function Header() {
               className="home-link-box"
             >
               <div className="link-box11">
-                <LuHouse size={20} />
+                <LuHouse size={22} />
                 <div>Home</div>
               </div>
             </Link>
           </div>
           <div>
             <Link
-              to="/articlePage"
+              to="/article-page"
               style={{ textDecoration: "none", color: "inherit" }}
               className="blog-link-box"
             >
               <div className="link-box2">
-                <IoBookOutline size={20} />
+                <IoBookOutline size={35} />
                 <div>Blog</div>
               </div>
             </Link>
           </div>
-          <div>
+          {user && user.role === "admin" && (
             <div>
-              <CiSettings size={20} />
-              <div>Admin</div>
+              <Link
+                to="/admin"
+                style={{ textDecoration: "none", color: "inherit" }}
+                className="admin-link-box"
+              >
+                <div className="link-box3">
+                  <CiSettings size={32} />
+                  <div>Admin</div>
+                </div>
+              </Link>
             </div>
-          </div>
+          )}
         </div>
       </div>
       <div className="sign-in-box">
@@ -64,18 +72,38 @@ export function Header() {
             <IoSunnyOutline size={20} />
           )}
         </div>
-        <div>
-          <div>
-            <FiUser />
+        
+        {user && user.email ? (
+          <div className="profile-container">
+            <div className="profile-btn">
+              <FiUser size={18} />
+              <span>{user.firstname || "Profile"}</span>
+            </div>
+            <div className="profile-dropdown">
+              <div className="user-info">
+                <p className="user-name">{user.firstname} {user.lastname}</p>
+                <p className="user-email">{user.email}</p>
+              </div>
+              <hr />
+              <Link to="/profile" className="dropdown-item">
+                View Profile
+              </Link>
+              <div onClick={logout} className="dropdown-item logout">
+                Log Out
+              </div>
+            </div>
           </div>
-
+        ) : (
           <Link
             to="/signin"
             style={{ textDecoration: "none", color: "inherit" }}
           >
-            <div>Sign In</div>
+            <div className="signin-btn">
+              <FiUser size={18} />
+              <div>Sign In</div>
+            </div>
           </Link>
-        </div>
+        )}
       </div>
     </div>
   );
