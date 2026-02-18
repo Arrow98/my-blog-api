@@ -1,8 +1,8 @@
 .footer {
   width: 96.8%;
-  background-color: #f9f9f9;
+  background-color: var(--footer-bg);
   padding: 60px 20px 20px;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid var(--border-color);
   font-family: Arial, sans-serif;
 }
 
@@ -46,7 +46,7 @@
 
 .footer-section p {
   font-size: 14px;
-  color: #6b7280;
+  color: var(--text-secondary);
   margin-top: 10px;
 }
 
@@ -62,7 +62,7 @@
 
 .footer-section ul li a {
   text-decoration: none;
-  color: #6b7280;
+  color: var(--text-secondary);
   font-size: 14px;
 }
 
@@ -73,7 +73,7 @@
 .footer-bottom {
   text-align: center;
   font-size: 13px;
-  color: #9ca3af;
+  color: var(--text-secondary);
   margin-top: 40px;
 }
 

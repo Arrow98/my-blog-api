@@ -7,9 +7,7 @@ import { Footer } from "../../Components/Footer/footer";
 export function SignInPage() {
   return (
     <div className="signin-page">
-      <Header />
       <SignIn />
-      <Footer />
     </div>
   );
 }

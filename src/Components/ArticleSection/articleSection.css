@@ -3,13 +3,7 @@
   height: 820px;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(
-    to bottom,
-    white 0%,
-    hsl(0, 0%, 98%) 40%,
-    hsl(0, 0%, 97%) 70%,
-    hsl(0, 0%, 96%) 100%
-  );
+  background: var(--section-gradient);
 }
 .articleSection-header {
   width: 100%;
@@ -24,12 +18,12 @@
   font-size: 20px;
   text-align: center;
   margin: 0 auto;
-  color: #71717a;
+  color: var(--text-secondary);
   margin-top: 20px;
 }
 .articleSection-card {
-  background-color: white;
-  border: 1px solid #e5e7eb;
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   width: 97%;
@@ -61,8 +55,8 @@
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  color: white;
-  background-color: black;
+  color: var(--bg-color);
+  background-color: var(--text-color);
 }
 .articleSection-card > div:nth-child(2) > div:nth-child(2) {
   width: 100%;
@@ -75,7 +69,7 @@
   width: 95%;
   font-size: 20px;
   text-align: justify;
-  color: #71717a;
+  color: var(--text-secondary);
   margin-top: 20px;
   line-height: 30px;
 }
@@ -84,7 +78,7 @@
   margin-top: 30px;
   width: 350px;
   justify-content: space-between;
-  color: #71717a;
+  color: var(--text-secondary);
 }
 .author-name {
   display: flex;
@@ -104,8 +98,8 @@ button {
   border-radius: 10px;
   border: none;
   font-weight: bold;
-  background-color: #18181b;
-  color: white;
+  background-color: var(--button-bg-primary);
+  color: var(--button-text-primary);
   display: flex;
   justify-content: center;
   align-items: center;

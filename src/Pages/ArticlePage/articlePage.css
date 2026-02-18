@@ -1,0 +1,12 @@
+.article-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--section-gradient);
+  padding-top: 65px; /* Account for fixed header */
+}
+
+.articles-container {
+    flex: 1;
+    width: 100%;
+}

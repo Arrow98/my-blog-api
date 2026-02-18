@@ -4,31 +4,43 @@ import { FiUser } from "react-icons/fi";
 import { SlCalender } from "react-icons/sl";
 import { MdOutlineAccessTime } from "react-icons/md";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { motion } from "framer-motion";
 
 export function ArticleSection() {
   return (
-    <div className="articleSection-box">
+    <motion.div 
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.8 }}
+      className="articleSection-box"
+    >
       <div className="articleSection-header">Featured Article</div>
       <div className="articleSection-info">
         Our most popular and impactful content, handpicked for you.
       </div>
-      <div className="articleSection-card">
+      
+      <motion.div 
+        whileHover={{ y: -10 }}
+        transition={{ type: "spring", stiffness: 300 }}
+        className="articleSection-card"
+      >
         <div>
           <img
             src="path/to/your-image.jpg"
-            alt="Description of image"
+            alt="Featured Article"
             width="300"
             height="200"
           />
         </div>
         <div>
-          <div>Technology</div>
-          <div>The Future of Web Development: What's Coming in 2024</div>
-          <div>
+          <div className="category-label">Technology</div>
+          <div className="card-title">The Future of Web Development: What's Coming in 2024</div>
+          <div className="card-desc">
             Explore the latest trends and technologies shaping the future of web
             development, from AI integration to new frameworks.
           </div>
-          <div>
+          <div className="card-footer">
             <div className="author-name">
               <FiUser />
               <div>Sarah Chen</div>
@@ -42,12 +54,16 @@ export function ArticleSection() {
               <div>8 min read</div>
             </div>
           </div>
-          <button>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             <div className="left-space"> Explore Articles</div>
             <FaArrowRightLong />
-          </button>
+          </motion.button>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
+

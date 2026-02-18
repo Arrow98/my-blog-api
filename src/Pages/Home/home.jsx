@@ -10,20 +10,15 @@ import { LastestArticleSection } from "../../Components/lastestArticleSection/la
 import { SubscribeSection } from "../../Components/Subcribe/subcribeSection";
 import { Footer } from "../../Components/Footer/footer";
 
-
 export function Home() {
   return (
     <div className="home">
-      <Header />
       <Hero />
       <About />
       <Impact />
-
       <ArticleSection />
       <LastestArticleSection />
       <SubscribeSection />
-      <Footer />
-
     </div>
   );
 }
