@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
 import "./hero.css";
+import { useNavigate } from "react-router-dom";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { motion } from "framer-motion";
 import { AppContext } from "../AppContext";
 
 export function Hero() {
   const { user } = useContext(AppContext);
+  const navigate = useNavigate();
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -43,6 +45,7 @@ export function Hero() {
           <motion.button 
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => navigate("/blog")}
             id="hero-button"
           >
             <div className="left-space"> Explore Articles</div>

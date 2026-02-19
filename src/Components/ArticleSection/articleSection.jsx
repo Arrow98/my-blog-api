@@ -1,5 +1,6 @@
 import React from "react";
 import "./articleSection.css";
+import { useNavigate } from "react-router-dom";
 import { FiUser } from "react-icons/fi";
 import { SlCalender } from "react-icons/sl";
 import { MdOutlineAccessTime } from "react-icons/md";
@@ -7,6 +8,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { motion } from "framer-motion";
 
 export function ArticleSection() {
+  const navigate = useNavigate();
   return (
     <motion.div 
       initial={{ opacity: 0, y: 50 }}
@@ -57,6 +59,7 @@ export function ArticleSection() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => navigate("/blog")}
           >
             <div className="left-space"> Explore Articles</div>
             <FaArrowRightLong />

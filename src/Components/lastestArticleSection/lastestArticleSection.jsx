@@ -1,10 +1,12 @@
 import React from "react";
 import "./lastestArticleSection.css";
+import { useNavigate } from "react-router-dom";
 import { FiUser } from "react-icons/fi";
 import { SlCalender } from "react-icons/sl";
 import { motion } from "framer-motion";
 
 export function LastestArticleSection() {
+  const navigate = useNavigate();
   const articlesData = [
     {
       image: "https://via.placeholder.com/300x200",
@@ -58,6 +60,7 @@ export function LastestArticleSection() {
           <motion.button 
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => navigate("/blog")}
             className="lastestArticleSection-button"
           >
             View All Articles

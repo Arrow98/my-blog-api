@@ -10,6 +10,18 @@ export function BlogArticleCard({ item }) {
     show: { y: 0, opacity: 1 },
   };
 
+  const getAuthorName = (author) => {
+    if (!author) return "TechBlog Staff";
+    if (typeof author === "object") {
+      return author.firstname ? `${author.firstname} ${author.lastname}` : "TechBlog Staff";
+    }
+    // If it's a string, check if it's a 24-char hex ID (MongoDB ObjectId)
+    if (typeof author === "string" && /^[0-9a-fA-F]{24}$/.test(author)) {
+      return "TechBlog Staff";
+    }
+    return author; // It's already a name string
+  };
+
   return (
     <motion.div
       variants={itemVariants}
@@ -32,7 +44,7 @@ export function BlogArticleCard({ item }) {
         <div className="blog-article-footer">
           <div className="footer-item">
             <FiUser size={14} />
-            <span>{item.author || "TechBlog Staff"}</span>
+            <span>{getAuthorName(item.author)}</span>
           </div>
           <div className="footer-item">
             <SlCalender size={14} />

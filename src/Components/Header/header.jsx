@@ -44,7 +44,7 @@ export function Header() {
           </div>
           <div>
             <Link
-              to="/article-page"
+              to="/blog"
               style={{ textDecoration: "none", color: "inherit" }}
               className="blog-link-box"
             >
