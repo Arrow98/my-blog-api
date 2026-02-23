@@ -4,15 +4,7 @@ export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-  const [user, setUser] = useState(() => {
-    const savedUser = localStorage.getItem("user");
-    try {
-      return savedUser && savedUser !== "undefined" ? JSON.parse(savedUser) : null;
-    } catch (e) {
-      console.error("Failed to parse user from localStorage", e);
-      return null;
-    }
-  });
+  const [user, setUser] = useState(null);
 
   const [isLoading, setIsLoading] = useState(true);
 
