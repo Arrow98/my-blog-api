@@ -48,7 +48,7 @@ export function SignIn() {
     loginUser(signinDetails)
       .then((data) => {
         login(data.data); // Corrected: user data is in data.data
-        localStorage.setItem("token", data.token);
+        localStorage.setItem("techblog_token", data.token);
         setSigninDetails({
           email: "",
           password: "",

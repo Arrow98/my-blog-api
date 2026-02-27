@@ -13,7 +13,7 @@ export function ArticleDetailPage() {
   const { setIsLoading } = useContext(AppContext);
   const [article, setArticle] = useState(null);
   const [error, setError] = useState(null);
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("techblog_token");
 
   useEffect(() => {
     console.log("ArticleDetailPage: Initializing fetch for ID:", id);

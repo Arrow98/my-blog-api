@@ -53,7 +53,7 @@ export function AddPostPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("techblog_token");
 
     if (!formData.title || formData.title.length < 5) {
       toast.error("Title must be at least 5 characters long!");

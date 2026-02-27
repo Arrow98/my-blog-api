@@ -17,7 +17,7 @@ export function CommentSection({ postId }) {
   }, [postId]);
 
   const fetchComments = async () => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("techblog_token");
     if (!token) return;
 
     try {
@@ -43,7 +43,7 @@ export function CommentSection({ postId }) {
     if (!commentText.trim()) return;
 
     setIsSubmitting(true);
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("techblog_token");
 
     try {
       const response = await fetch(`${BASE_URL}/posts/${postId}/comments`, {
