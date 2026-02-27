@@ -10,6 +10,7 @@ import { Layout } from "./Components/Layout/Layout";
 import { AdminPage } from "./Pages/AdminPage/AdminPage";
 import { Profile } from "./Pages/ProfilePage/profile";
 import { AddPostPage } from "./Pages/ArticlePage/addPostPage";
+import { ArticleDetailPage } from "./Pages/ArticleDetailPage/ArticleDetailPage";
 import { ToastContainer } from "react-toastify";
 import { AnimatePresence } from "framer-motion";
 
@@ -44,6 +45,7 @@ function AnimatedRoutes() {
             <Route path="/admin" element={<AdminPage />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/add-post" element={<AddPostPage />} />
+            <Route path="/blog/:id" element={<ArticleDetailPage />} />
           </Route>
         </Routes>
       </AnimatePresence>

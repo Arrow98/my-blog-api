@@ -1,0 +1,135 @@
+.comment-section-wrapper {
+  margin-top: 40px;
+}
+
+.comment-section-wrapper h3 {
+  font-size: 1.8rem;
+  margin-bottom: 32px;
+  color: var(--text-primary);
+}
+
+.add-comment-box {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 24px;
+  margin-bottom: 48px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.add-comment-box textarea {
+  width: 100%;
+  min-height: 120px;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 16px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  resize: vertical;
+  margin-bottom: 20px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.add-comment-box textarea:focus {
+  border-color: var(--button-bg-primary);
+  box-shadow: 0 0 0 3px rgba(var(--button-bg-primary-rgb), 0.1);
+}
+
+.comment-submit-btn {
+  background: var(--button-bg-primary);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.comment-submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(var(--button-bg-primary-rgb), 0.3);
+  filter: brightness(1.1);
+}
+
+.comment-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.signin-prompt {
+  text-align: center;
+  padding: 20px;
+  border: 1px dashed var(--border-color);
+  border-radius: 16px;
+  color: var(--text-secondary);
+}
+
+.signin-prompt a {
+  color: var(--button-bg-primary);
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 8px;
+}
+
+.comment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.comment-item {
+  display: flex;
+  gap: 20px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.comment-avatar {
+  width: 48px;
+  height: 48px;
+  background: var(--button-bg-primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.comment-content-box {
+  flex-grow: 1;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.comment-author-name {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.comment-date {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.comment-text {
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+.no-comments {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 40px;
+  font-style: italic;
+}
