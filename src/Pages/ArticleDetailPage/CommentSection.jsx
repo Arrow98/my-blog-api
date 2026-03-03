@@ -21,7 +21,7 @@ export function CommentSection({ postId }) {
     if (!token) return;
 
     try {
-      const response = await fetch(`${BASE_URL}/posts/${postId}/comments`, {
+      const response = await fetch(`${BASE_URL}/comments`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -46,15 +46,16 @@ export function CommentSection({ postId }) {
     const token = localStorage.getItem("techblog_token");
 
     try {
-      const response = await fetch(`${BASE_URL}/posts/${postId}/comments`, {
+      const response = await fetch(`${BASE_URL}/comments`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          text: commentText,
-          author: `${user.firstname} ${user.lastname}`,
+          description: commentText,
+          user: user,
+          post: postId,
         }),
       });
 
