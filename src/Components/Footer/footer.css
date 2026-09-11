@@ -1,5 +1,5 @@
 .footer {
-  width: 96.8%;
+  width: 100%;
   background-color: var(--footer-bg);
   padding: 60px 20px 20px;
   border-top: 1px solid var(--border-color);
@@ -89,6 +89,6 @@
     margin-top: -90px;
   }
   .footer {
-    width: 93%;
+    width: 100%;
   }
 }

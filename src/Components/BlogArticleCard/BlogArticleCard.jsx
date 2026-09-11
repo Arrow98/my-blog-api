@@ -3,8 +3,10 @@ import "./BlogArticleCard.css";
 import { FiUser } from "react-icons/fi";
 import { SlCalender } from "react-icons/sl";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 export function BlogArticleCard({ item }) {
+  const navigate = useNavigate();
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
     show: { y: 0, opacity: 1 },
@@ -28,6 +30,8 @@ export function BlogArticleCard({ item }) {
       whileHover={{ y: -8, scale: 1.02, transition: { duration: 0.2 } }}
       whileTap={{ scale: 0.98 }}
       className="blog-article-card-wrapper"
+      onClick={() => navigate(`/blog/${item._id}`)}
+      style={{ cursor: "pointer" }}
     >
       <div className="blog-article-image-box">
         <img src={item.image || "https://via.placeholder.com/400x250"} alt={item.title} />

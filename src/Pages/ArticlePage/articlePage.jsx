@@ -14,7 +14,7 @@ export function ArticlePage() {
   const [getData, setGetData] = useState([]);
   const [finalData, setFinalData] = useState([]);
   const { setIsLoading } = useContext(AppContext);
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("techblog_token");
 
   useEffect(() => {
     setIsLoading(true);

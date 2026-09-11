@@ -1,0 +1,139 @@
+.article-detail-container {
+  min-height: 100vh;
+  padding: 120px 20px 60px;
+  max-width: 900px;
+  margin: 0 auto;
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.article-detail-header {
+  margin-bottom: 40px;
+}
+
+.back-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+  transition: color 0.3s ease;
+  width: fit-content;
+}
+
+.back-link:hover {
+  color: var(--button-bg-primary);
+}
+
+.article-category-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  background: rgba(var(--button-bg-primary-rgb), 0.1);
+  color: var(--button-bg-primary);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.article-detail-header h1 {
+  font-size: 3rem;
+  line-height: 1.2;
+  margin-bottom: 24px;
+  color: var(--text-primary);
+  font-weight: 800;
+}
+
+.article-meta-info {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.article-hero-image {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 24px;
+  overflow: hidden;
+  margin-bottom: 48px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.article-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.article-hero-image:hover img {
+  transform: scale(1.05);
+}
+
+.article-body-content {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: var(--text-primary);
+  margin-bottom: 60px;
+  white-space: pre-wrap;
+}
+
+.article-body-content p {
+  margin-bottom: 24px;
+}
+
+.article-footer-divider {
+  height: 1px;
+  background: var(--border-color);
+  margin: 60px 0;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  gap: 20px;
+}
+
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  text-align: center;
+}
+
+.error-container h2 {
+  margin-bottom: 16px;
+  color: #ff4757;
+}
+
+@media (max-width: 768px) {
+  .article-detail-header h1 {
+    font-size: 2.2rem;
+  }
+  
+  .article-meta-info {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+}

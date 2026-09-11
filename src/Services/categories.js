@@ -8,7 +8,7 @@ export async function getCategories() {
 }
 
 export async function addCategory(categoryData) {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("techblog_token");
   const response = await fetch(`${BASE_URL}/categories`, {
     method: "POST",
     headers: {
